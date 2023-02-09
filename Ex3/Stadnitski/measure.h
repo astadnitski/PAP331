@@ -8,10 +8,10 @@ struct matrix { float mtx[2][2]; };
 class measure {
 
 private:
-  float x = 0.0;
-  float y = 0.0;
-  vector <float> refX {7, 8, 6, 3, 0, 5, 4, 5, 5, 0}; // Ex2 PyOut
-  vector <float> refY {2, 6, 7, 3, 3, 2, 2, 8, 0, 1}; // Ex2 ShOut % 9
+  float x;
+  float y;
+  vector <float> refX;
+  vector <float> refY;
 
 public:
 
@@ -20,6 +20,9 @@ public:
 
   float getX() { return x; }
   float getY() { return y; }
+
+  void setRefX(vector <float> a) { refX = a; }
+  void setRefY(vector <float> a) { refY = a; }
 
   float vectorSum(vector <float> a) {
     float sum = 0;
