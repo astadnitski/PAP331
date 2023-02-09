@@ -34,7 +34,7 @@ public:
     float avg = vectorSum(a) / a.size();
     float sum;
     for (int i = 0; i < a.size(); i++) sum += pow(a.at(i) - avg, 2);
-    return sum / 9;
+    return sum / (a.size() - 1);
   }
 
   float covariance(vector <float> a, vector <float> b) {
