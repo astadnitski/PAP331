@@ -7,10 +7,10 @@ all:
 	@$(MAKE) clean --no-print-directory
 
 compile: $(OBJ)
-	@$(CXX) src/check.o -Wall -o check
+	@$(CXX) $(OBJ) -Wall -o test
 
 run:
-	@./check
+	@./test
 
 clean:
 	@rm $(wildcard src/*.o)

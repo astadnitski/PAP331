@@ -3,17 +3,19 @@ using namespace std;
 
 int main(int argc, char** argv) {
 
+  cout << "Testing parent class" << endl;
+
   track0 measurement0;
   measurement0.setMomentum(1, 1, 1, 1);
+  cout << "- Transverse momentum: " << measurement0.getTransverse() << endl;
+  cout << "- Pseudorapidity: " << measurement0.getPseudo() << endl;
 
-  float t = measurement0.getTransverse();
-  cout << "- Transverse momentum: " << t << endl;
-
-  float p = measurement0.getPseudo();
-  cout << "- Pseudorapidity: " << p << endl;
+  cout << "Testing inheriting class" << endl;
 
   track1 measurement1;
   measurement1.setMomentum(2, 2, 2, 2);
+  cout << "- Transverse momentum: " << measurement1.getTransverse() << endl;
+  cout << "- Pseudorapidity: " << measurement1.getPseudo() << endl;
 
   measurement1.setParticleID(3);
   cout << "- Particle ID: " << measurement1.getParticleID() << endl;
