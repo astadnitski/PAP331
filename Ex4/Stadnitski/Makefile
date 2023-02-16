@@ -1,5 +1,6 @@
 SRC = $(wildcard src/*.cc)
 OBJ = $(addsuffix .o, $(basename $(SRC)))
+OPT = -Wall -o
 
 all:
 	@$(MAKE) compile --no-print-directory
@@ -7,7 +8,7 @@ all:
 	@$(MAKE) clean --no-print-directory
 
 compile: $(OBJ)
-	@$(CXX) $(OBJ) -Wall -o test
+	@$(CXX) $(OBJ) $(OPT) test
 
 run:
 	@./test
