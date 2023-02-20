@@ -1,4 +1,4 @@
-void normal() {
+void makenumbers() {
 
     int N = 1000;
     TRandom* rng = new TRandom;
