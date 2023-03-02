@@ -27,6 +27,7 @@ def main():
     hist.GetYaxis().SetTitle('Number of hits')
     hist.GetYaxis().CenterTitle(True)
 
+    hist.Fit('gaus')
     hist.SetStats(0)
     hist.Draw()
 

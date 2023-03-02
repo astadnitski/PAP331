@@ -1,8 +1,8 @@
 void graph()
 {
 //=========Macro generated from canvas: Canvas/
-//=========  (Wed Mar  1 23:19:47 2023) by ROOT version 6.24/06
-   TCanvas *Canvas = new TCanvas("Canvas", "",102,109,600,600);
+//=========  (Thu Mar  2 11:00:42 2023) by ROOT version 6.24/06
+   TCanvas *Canvas = new TCanvas("Canvas", "",0,0,600,600);
    Canvas->SetHighLightColor(2);
    Canvas->Range(0,0,1,1);
    Canvas->SetFillColor(0);
@@ -78,6 +78,30 @@ void graph()
    hist__1->SetBinContent(84,1);
    hist__1->SetEntries(1000);
    hist__1->SetStats(0);
+   
+   TF1 *gaus1 = new TF1("gaus","gaus",-4,4, TF1::EAddToList::kNo);
+   gaus1->SetFillColor(19);
+   gaus1->SetFillStyle(0);
+   gaus1->SetLineColor(2);
+   gaus1->SetLineWidth(2);
+   gaus1->SetChisquare(54.09265);
+   gaus1->SetNDF(62);
+   gaus1->GetXaxis()->SetLabelFont(42);
+   gaus1->GetXaxis()->SetTitleOffset(1);
+   gaus1->GetXaxis()->SetTitleFont(42);
+   gaus1->GetYaxis()->SetLabelFont(42);
+   gaus1->GetYaxis()->SetTitleFont(42);
+   gaus1->SetParameter(0,31.3757);
+   gaus1->SetParError(0,1.298175);
+   gaus1->SetParLimits(0,0,0);
+   gaus1->SetParameter(1,-0.06715965);
+   gaus1->SetParError(1,0.03325555);
+   gaus1->SetParLimits(1,0,0);
+   gaus1->SetParameter(2,0.9766719);
+   gaus1->SetParError(2,0.02733144);
+   gaus1->SetParLimits(2,0,9.612673);
+   gaus1->SetParent(hist__1);
+   hist__1->GetListOfFunctions()->Add(gaus1);
    hist__1->SetFillColor(5);
    hist__1->SetLineWidth(3);
    hist__1->GetXaxis()->SetTitle("Simulated variable");
