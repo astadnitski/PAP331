@@ -47,19 +47,35 @@ def read(fileName):
     massTree = sim.Get('massTree')
     widthTree = sim.Get('widthTree')
 
-    m, w = array( 'f' ), array( 'f' )
+    m, w = array('f'), array('f')
     massLeaf = massTree.GetLeaf('m')
     widthLeaf = widthTree.GetLeaf('w')
 
     N = massTree.GetEntries()
+    m125, w125 = array('f'), array('f')
 
     for i in range(N):
         massTree.GetEntry(i)
         m.append(massLeaf.GetValue())
         widthTree.GetEntry(i)
         w.append(widthLeaf.GetValue())
+        if m[i] == 125:
+            m125.append(125)
+            w125.append(w[i])
 
-    graph = TGraph(N, m, w)
+    print(type(w125))
+    print(type(m))
+
+    graph = TMultiGraph()
+
+    graph0 = TGraph(N, m, w)
+    #graph.Draw('A*')
+    graph.Add(graph0)
+
+    graph1 = TGraph(1, m125, w125)
+    graph1.SetMarkerColor(2)
+    graph.Add(graph1)
+
     graph.Draw('A*')
 
     graph.SetTitle('HDECAY mass-width plot')
@@ -67,43 +83,8 @@ def read(fileName):
     graph.GetXaxis().CenterTitle(True)
     graph.GetYaxis().SetTitle('Decay width')
     graph.GetYaxis().CenterTitle(True)
+    graph
 
     canvas.Print('graph.png')
 
 if __name__ == '__main__': main()
-
-'''
-    canvas = TCanvas('Canvas', '', 600, 600)
-    canvas.SetFillColor(0)
-    canvas.cd()
-    
-    normals = TFile.Open('normals.root', 'READ')
-    tree = normals.Get('tree')
-    hist = TH1F('hist', 'Standard Gaussian, N = 1000', 100, -4, 4)
-    
-    n = array('f', [0])
-    tree.Branch('n', n, 'n/F')
-    N = tree.GetEntries()
-        
-    for i in tree: hist.Fill(i.n)
-
-    hist.SetFillColor(5)
-    hist.SetLineColor(1)
-    hist.SetLineWidth(3)
-
-    hist.GetXaxis().SetTitle('Simulated variable')
-    hist.GetXaxis().CenterTitle(True)
-    hist.GetYaxis().SetTitle('Number of hits')
-    hist.GetYaxis().CenterTitle(True)
-
-    hist.Fit('gaus')
-    hist.SetStats(0)
-    hist.Draw()
-
-    canvas.Print('graph.C')
-    canvas.Print('graph.eps')
-    canvas.Print('graph.png')
-    
-    print('Reached end of main')
-
-'''
