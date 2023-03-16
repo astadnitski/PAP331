@@ -5,15 +5,22 @@ from ROOT import *
 
 def main():
 
-    HDECAY = write(np.loadtxt('HDECAY/br.sm2', skiprows = 2))
+    HDECAY = write('HDECAY')
     read(HDECAY)
+
+    FEYNHIGGS = write('FEYNHIGGS')
+    read(FEYNHIGGS)
 
     print('Reached end of main.')
     
-def write(data):
+def write(name):
 
-    fileName = 'sim.root'
+    fileName = 'sim' + name + '.root'
     sim = TFile.Open(fileName, 'RECREATE')
+
+    #if name is 'HDECAY':
+
+    data = np.loadtxt(name + '/br.sm2', skiprows = 2)
 
     m = array('f', [0])
     massTree = TTree('massTree', 'Higgs mass variable')
@@ -34,10 +41,12 @@ def write(data):
     massTree.Write()
     widthTree.Write()
     sim.Close()
-
+    
     return fileName
 
 def read(fileName):
+
+    #if 'HDECAY' in fileName:
 
     canvas = TCanvas('Canvas', '', 600, 600)
     canvas.SetMargin(0.2, 0.1, 0.1, 0.1)
@@ -63,9 +72,6 @@ def read(fileName):
             m125.append(125)
             w125.append(w[i])
 
-    print(type(w125))
-    print(type(m))
-
     graph = TMultiGraph()
 
     graph0 = TGraph(N, m, w)
@@ -73,7 +79,7 @@ def read(fileName):
     graph.Add(graph0)
 
     graph1 = TGraph(1, m125, w125)
-    graph1.SetMarkerColor(2)
+    graph1.SetMarkerColor(3)
     graph.Add(graph1)
 
     graph.Draw('A*')
@@ -85,6 +91,8 @@ def read(fileName):
     graph.GetYaxis().CenterTitle(True)
     graph
 
-    canvas.Print('graph.png')
+    canvas.Print('graph' + fileName + '.png')
+
+    #else: print('Not HDECAY')
 
 if __name__ == '__main__': main()
