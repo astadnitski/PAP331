@@ -6,17 +6,14 @@ from ROOT import *
 def main():
 
     HDECAY = write('HDECAY')
-    read(HDECAY)
+    #draw(HDECAY)
 
     FEYNHIGGS = write('FEYNHIGGS')
-    read(FEYNHIGGS)
-
-    print('Reached end of main.')
+    draw('both')
     
 def write(name):
 
-    fileName = 'sim' + name + '.root'
-    sim = TFile.Open(fileName, 'RECREATE')
+    sim = TFile.Open('sim' + name + '.root', 'RECREATE')
 
     #if name is 'HDECAY':
 
@@ -42,17 +39,11 @@ def write(name):
     widthTree.Write()
     sim.Close()
     
-    return fileName
+    return name
 
-def read(fileName):
+def read(name, color):
 
-    #if 'HDECAY' in fileName:
-
-    canvas = TCanvas('Canvas', '', 600, 600)
-    canvas.SetMargin(0.2, 0.1, 0.1, 0.1)
-    canvas.cd()
-    
-    sim = TFile.Open(fileName, 'READ')
+    sim = TFile.Open('sim' + name + '.root', 'READ')
     massTree = sim.Get('massTree')
     widthTree = sim.Get('widthTree')
 
@@ -72,27 +63,48 @@ def read(fileName):
             m125.append(125)
             w125.append(w[i])
 
-    graph = TMultiGraph()
-
     graph0 = TGraph(N, m, w)
-    #graph.Draw('A*')
-    graph.Add(graph0)
+    graph0.SetMarkerColor(color)
 
     graph1 = TGraph(1, m125, w125)
-    graph1.SetMarkerColor(3)
-    graph.Add(graph1)
+    graph1.SetMarkerColor(1)
+
+    return graph0, graph1
+
+def draw(mode):
+
+    name = ''
+
+    canvas = TCanvas('Canvas', '', 600, 600)
+    canvas.SetMargin(0.2, 0.1, 0.1, 0.1)
+    canvas.cd()
+    
+    graph = TMultiGraph()
+
+    graphHD0, graphHD1 = read('HDECAY', 2)
+    graphHD0.SetName('hd')
+    graph.Add(graphHD0)
+    graph.Add(graphHD1)
+
+    if mode is 'both':
+        graphFH0, graphFH1 = read('FEYNHIGGS', 4)
+        graphFH0.SetName('fh')
+        graph.Add(graphFH0)
+        graph.Add(graphFH1)
 
     graph.Draw('A*')
 
-    graph.SetTitle('HDECAY mass-width plot')
+    graph.SetTitle(name + ' Mass-width plot')
     graph.GetXaxis().SetTitle('Higgs mass')
     graph.GetXaxis().CenterTitle(True)
     graph.GetYaxis().SetTitle('Decay width')
     graph.GetYaxis().CenterTitle(True)
-    graph
 
-    canvas.Print('graph' + fileName + '.png')
+    legend = TLegend(0.7, 0.2, 0.9, 0.3)
+    legend.AddEntry('fh', 'FeynHiggs')
+    legend.AddEntry('hd', 'HDECAY')
+    legend.Draw()
 
-    #else: print('Not HDECAY')
+    canvas.Print('graph' + name + '.png')
 
 if __name__ == '__main__': main()
