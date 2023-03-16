@@ -2,14 +2,6 @@
 from array import array
 import numpy as np
 from ROOT import *
-
-def main():
-
-    HDECAY = write('HDECAY')
-    #draw(HDECAY)
-
-    FEYNHIGGS = write('FEYNHIGGS')
-    draw('both')
     
 def write(name):
 
@@ -39,8 +31,6 @@ def write(name):
     widthTree.Write()
     sim.Close()
     
-    return name
-
 def read(name, color):
 
     sim = TFile.Open('sim' + name + '.root', 'READ')
@@ -69,42 +59,76 @@ def read(name, color):
     graph1 = TGraph(1, m125, w125)
     graph1.SetMarkerColor(1)
 
-    return graph0, graph1
+    return graph0, graph1, w
 
 def draw(mode):
 
-    name = ''
-
-    canvas = TCanvas('Canvas', '', 600, 600)
-    canvas.SetMargin(0.2, 0.1, 0.1, 0.1)
-    canvas.cd()
+    if mode is 'BOTH':
+        canvas = TCanvas('Canvas', '', 600, 1200)
+        canvas.SetMargin(0.2, 0.1, 0.1, 0.1)
+        canvas.Divide(1, 2)
+    else:
+        canvas = TCanvas('Canvas', '', 600, 600)
+        canvas.SetMargin(0.2, 0.1, 0.1, 0.1)
     
+    canvas.cd(1)
     graph = TMultiGraph()
 
-    graphHD0, graphHD1 = read('HDECAY', 2)
-    graphHD0.SetName('hd')
-    graph.Add(graphHD0)
-    graph.Add(graphHD1)
+    if mode is not 'FEYNHIGGS':
+        graphHD0, graphHD1, denominator = read('HDECAY', 2)
+        graphHD0.SetName('hd')
+        graph.Add(graphHD0)
+        graph.Add(graphHD1)
 
-    if mode is 'both':
-        graphFH0, graphFH1 = read('FEYNHIGGS', 4)
+    if mode is not 'HDECAY':
+        graphFH0, graphFH1, numerator = read('FEYNHIGGS', 4)
         graphFH0.SetName('fh')
         graph.Add(graphFH0)
         graph.Add(graphFH1)
 
     graph.Draw('A*')
 
-    graph.SetTitle(name + ' Mass-width plot')
+    graph.SetTitle('Mass-width plot, ' + mode)
     graph.GetXaxis().SetTitle('Higgs mass')
     graph.GetXaxis().CenterTitle(True)
     graph.GetYaxis().SetTitle('Decay width')
     graph.GetYaxis().CenterTitle(True)
+    graph.GetYaxis().SetMaxDigits(3)
 
-    legend = TLegend(0.7, 0.2, 0.9, 0.3)
+    if mode is not 'BOTH':
+        canvas.Print('graph' + mode + '.png')
+        return
+
+    legend = TLegend(0.7, 0.1, 0.9, 0.2)
     legend.AddEntry('fh', 'FeynHiggs')
     legend.AddEntry('hd', 'HDECAY')
     legend.Draw()
 
-    canvas.Print('graph' + name + '.png')
+    canvas.cd(2)
+
+    base, ratios = array('f'), array('f')
+
+    for w in range(len(numerator)):
+        base.append(120 + w)
+        ratios.append(numerator[w] / denominator[w])
+
+    ratio = TGraph(len(numerator), base, ratios)
+    ratio.SetTitle('FeynHiggs / HDECAY')
+    ratio.GetXaxis().SetTitle('Higgs mass')
+    ratio.GetXaxis().CenterTitle(True)
+    ratio.GetYaxis().SetTitle('Ratio')
+    ratio.GetYaxis().CenterTitle(True)
+    ratio.Draw('A*')
+
+    canvas.Print('graph' + mode + '.png')
+
+def main():
+
+    write('HDECAY')
+    write('FEYNHIGGS')
+    
+    draw('HDECAY')
+    draw('FEYNHIGGS')
+    draw('BOTH')
 
 if __name__ == '__main__': main()
