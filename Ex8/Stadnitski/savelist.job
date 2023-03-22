@@ -1,0 +1,8 @@
+#!/bin/tcsh
+setenv PYTHIA8DATA $PWD/pythia8307/share/Pythia8/xmldoc
+setenv LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:$PWD/pythia8307/lib:$PWD/../Pythia8/LHAPDF/lib/
+#setenv LHAPATH $PWD/../Pythia8/LHAPDF
+setenv LHAPATH /usr/local/share/LHAPDF
+
+./test.exe > output.txt
+echo Saved output to file.

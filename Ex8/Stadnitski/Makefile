@@ -4,14 +4,18 @@ INC = -I$(PYTHIA8_DIR)/include
 LIB = -L$(PYTHIA8_DIR)/lib -lpythia8 -ldl
 OPT = -g -Wall
 
-all:
-	$(MAKE) width
+all: 
+	$(MAKE) $(PYTHIA8_DIR)
 
 %:
-	$(CXX) $(OPT) $(INC) $@.cc $(LIBS) -o $@
+	cp $(PYTHIA8_DIR)/examples/$@.cc .
+	$(CXX) $(OPT) $(INC) $@.cc $(LIB) -o $@
+
+list:
+	$(CXX) $(OPT) $(INC) $@.cc $(LIB) -o test.exe
+	@echo Now run savelist.job
 
 clean:
-	#rm -rf $(wildcard *~ main* pythia* *.exe)
-
-width:
-	$(CXX) $(OPT) $(INC) $@.cc $(LIBS) -o width.exe
+	@#rm -rf $(wildcard *~ main* pythia* *.exe)
+	rm -rf $(wildcard *~ *.txt *.exe)
+	@echo State reset
