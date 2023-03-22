@@ -4,5 +4,4 @@ setenv LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:$PWD/pythia8307/lib:$PWD/../Pythia8/LH
 #setenv LHAPATH $PWD/../Pythia8/LHAPDF
 setenv LHAPATH /usr/local/share/LHAPDF
 
-./list.exe > list.txt
-echo Saved output to file.
+./width.exe
