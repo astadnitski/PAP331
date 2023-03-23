@@ -5,7 +5,26 @@ import re
 from ROOT import *
 
 def part1():
-    return 1
+
+    loc = -1
+    id = re.compile(' id ')
+    col = re.compile(' [a-zA-Z]+')
+    for row, line in enumerate(open('list.txt')):
+        for match0 in re.finditer(id, line):
+            for match1 in re.finditer(col, line):
+                if match1.group() == ' mWidth': break
+                loc += 1
+
+    idx = 0
+    id = re.compile('h0')
+    col = re.compile(' [a-zA-Z0-9]+\.*[a-zA-Z0-9]*')
+    for row, line in enumerate(open('list.txt')):
+        for match0 in re.finditer(id, line):
+            for match1 in re.finditer(col, line):
+                if idx == loc: width = match1.group()
+                idx += 1
+
+    return width
 
 def part2():
 
@@ -52,8 +71,13 @@ def part2():
     hist.GetYaxis().SetTitle('Number of events')
     hist.GetYaxis().CenterTitle(True)
 
+    #g = hist.Fit('gaus') 72
     hist.SetStats(0)
     hist.Draw()
+
+    binwidth = 1 #hist.GetBinWidth(1)
+    stdev = hist.GetStdDev()
+    print('FWHM:', 2.335 * binwidth * stdev)
 
     plotName = 'plots/HiggsHistogram'
     canvas.Print(plotName + '.C')
@@ -65,7 +89,7 @@ def part2():
 
 def main():
     with open('WidthRESULTS', 'w') as file:
-        file.write('Part 1 width: ' + str(part1()))
-        file.write('Part 2 width: ' + str(part2()))
+        file.write('Part 1 width\n mWidth in Pythia list output corresponding to h0:' + str(part1()) + ' GeV \n')
+        file.write('Part 2 width\n Calculated from histogram of masses: ' + str(part2()) + ' GeV')
     
 if __name__ == '__main__': main()

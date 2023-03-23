@@ -1,7 +1,7 @@
 void HiggsHistogram()
 {
 //=========Macro generated from canvas: Canvas/
-//=========  (Thu Mar 23 23:22:05 2023) by ROOT version 6.24/06
+//=========  (Fri Mar 24 01:01:07 2023) by ROOT version 6.24/06
    TCanvas *Canvas = new TCanvas("Canvas", "",0,0,600,600);
    Canvas->SetHighLightColor(2);
    Canvas->Range(0,0,1,1);
