@@ -1,7 +1,10 @@
 #!/bin/tcsh
+
+setenv LHAPATH $PWD/LHAPDF-6.4.0/lhapdf
+setenv LHAPDF_DATA_PATH $PWD/LHAPDF-6.4.0/lhapdf
+
 setenv PYTHIA8DATA $PWD/pythia8307/share/Pythia8/xmldoc
 setenv LD_LIBRARY_PATH ${LD_LIBRARY_PATH}:$PWD/pythia8307/lib:$PWD/../Pythia8/LHAPDF/lib/
-#setenv LHAPATH $PWD/../Pythia8/LHAPDF
-setenv LHAPATH /usr/local/share/LHAPDF
 
-./width.exe
+./masses.exe > masses.txt
+echo Saved output to file masses.txt

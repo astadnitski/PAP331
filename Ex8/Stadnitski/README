@@ -1,0 +1,7 @@
+The idea:
+- Install Pythia, LHAPDF, and selected PDF as in example
+- C++ script using Pythia to generate the data
+- Compile C++ with makefile
+- Run job to save C++ output to txt file
+- Python sript uses Pyroot to plot data from txt file
+- Clean

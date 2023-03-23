@@ -15,8 +15,8 @@ list:
 	$(CXX) $(OPT) $(INC) $@.cc $(LIB) -o list.exe
 	@echo Now run savelist.job
 
-width:
-	$(CXX) $(OPT) $(INC) $@.cc $(LIB) -o width.exe
+masses:
+	$(CXX) $(OPT) $(INC) $@.cc $(LIB) -o masses.exe
 
 clean:
 	@#rm -rf $(wildcard *~ main* pythia* *.exe)
