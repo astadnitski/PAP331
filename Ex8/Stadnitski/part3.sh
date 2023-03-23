@@ -1,0 +1,1 @@
+sed 's/FFLAGS =/FFLAGS = -fallow-argument-mismatch/' makefile
