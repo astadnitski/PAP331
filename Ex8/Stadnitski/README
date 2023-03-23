@@ -5,3 +5,10 @@ The idea:
 - Run job to save C++ output to txt file
 - Python sript uses Pyroot to plot data from txt file
 - Clean
+
+Steps:
+- make list (needed for part 1)
+- savelist.job
+- make masses (needed for part 2)
+- savemasses.job
+- python2 CalculateWidth.py (outputs results for parts 1 & 2, makes plot)

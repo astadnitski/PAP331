@@ -1,0 +1,78 @@
+void HiggsHistogram()
+{
+//=========Macro generated from canvas: Canvas/
+//=========  (Thu Mar 23 23:22:05 2023) by ROOT version 6.24/06
+   TCanvas *Canvas = new TCanvas("Canvas", "",0,0,600,600);
+   Canvas->SetHighLightColor(2);
+   Canvas->Range(0,0,1,1);
+   Canvas->SetFillColor(0);
+   Canvas->SetBorderMode(0);
+   Canvas->SetBorderSize(2);
+   Canvas->SetFrameBorderMode(0);
+   
+   TH1F *hist__1 = new TH1F("hist__1","Generated Higgs masses, N = 1000",100,124.85,125.15);
+   hist__1->SetBinContent(4,1);
+   hist__1->SetBinContent(6,1);
+   hist__1->SetBinContent(17,1);
+   hist__1->SetBinContent(21,1);
+   hist__1->SetBinContent(24,1);
+   hist__1->SetBinContent(26,1);
+   hist__1->SetBinContent(28,1);
+   hist__1->SetBinContent(33,1);
+   hist__1->SetBinContent(36,1);
+   hist__1->SetBinContent(37,2);
+   hist__1->SetBinContent(41,1);
+   hist__1->SetBinContent(42,4);
+   hist__1->SetBinContent(43,4);
+   hist__1->SetBinContent(44,4);
+   hist__1->SetBinContent(45,7);
+   hist__1->SetBinContent(46,12);
+   hist__1->SetBinContent(47,17);
+   hist__1->SetBinContent(48,29);
+   hist__1->SetBinContent(49,69);
+   hist__1->SetBinContent(50,243);
+   hist__1->SetBinContent(51,439);
+   hist__1->SetBinContent(52,65);
+   hist__1->SetBinContent(53,24);
+   hist__1->SetBinContent(54,10);
+   hist__1->SetBinContent(55,15);
+   hist__1->SetBinContent(56,5);
+   hist__1->SetBinContent(57,1);
+   hist__1->SetBinContent(58,5);
+   hist__1->SetBinContent(59,6);
+   hist__1->SetBinContent(60,4);
+   hist__1->SetBinContent(61,4);
+   hist__1->SetBinContent(62,3);
+   hist__1->SetBinContent(64,2);
+   hist__1->SetBinContent(65,2);
+   hist__1->SetBinContent(66,2);
+   hist__1->SetBinContent(67,2);
+   hist__1->SetBinContent(68,1);
+   hist__1->SetBinContent(69,2);
+   hist__1->SetBinContent(71,1);
+   hist__1->SetBinContent(73,1);
+   hist__1->SetBinContent(78,1);
+   hist__1->SetBinContent(79,2);
+   hist__1->SetBinContent(80,1);
+   hist__1->SetBinContent(96,1);
+   hist__1->SetEntries(1000);
+   hist__1->SetStats(0);
+   hist__1->SetFillColor(3);
+   hist__1->SetLineWidth(2);
+   hist__1->GetXaxis()->SetTitle("Higgs mass [GeV]");
+   hist__1->GetXaxis()->CenterTitle(true);
+   hist__1->GetXaxis()->SetLabelFont(42);
+   hist__1->GetXaxis()->SetTitleOffset(1);
+   hist__1->GetXaxis()->SetTitleFont(42);
+   hist__1->GetYaxis()->SetTitle("Number of events");
+   hist__1->GetYaxis()->CenterTitle(true);
+   hist__1->GetYaxis()->SetLabelFont(42);
+   hist__1->GetYaxis()->SetTitleFont(42);
+   hist__1->GetZaxis()->SetLabelFont(42);
+   hist__1->GetZaxis()->SetTitleOffset(1);
+   hist__1->GetZaxis()->SetTitleFont(42);
+   hist__1->Draw("");
+   Canvas->Modified();
+   Canvas->cd();
+   Canvas->SetSelected(Canvas);
+}

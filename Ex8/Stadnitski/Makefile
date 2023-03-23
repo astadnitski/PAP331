@@ -17,6 +17,7 @@ list:
 
 masses:
 	$(CXX) $(OPT) $(INC) $@.cc $(LIB) -o masses.exe
+	@echo Now run savemasses.job
 
 clean:
 	@#rm -rf $(wildcard *~ main* pythia* *.exe)
