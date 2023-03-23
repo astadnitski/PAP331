@@ -20,8 +20,7 @@ int main() {
     int HiggsID = 25;
 
     // Read in external PDF
-    //pythia.readString("PDF:pSet = LHAPDF6:cteq6l1");
-
+    pythia.readString("PDF:pSet = LHAPDF6:cteq6l1");
     pythia.init();
 
     /// STEP 2: EVENT GENERATION LOOP ///

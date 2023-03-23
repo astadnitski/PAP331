@@ -5,11 +5,8 @@ LIB = -L$(PYTHIA8_DIR)/lib -lpythia8 -ldl
 OPT = -g -Wall
 
 all: 
-	$(MAKE) $(PYTHIA8_DIR)
-
-%:
-	cp $(PYTHIA8_DIR)/examples/$@.cc .
-	$(CXX) $(OPT) $(INC) $@.cc $(LIB) -o $@
+	$(MAKE) list
+	$(MAKE) masses
 
 list:
 	$(CXX) $(OPT) $(INC) $@.cc $(LIB) -o list.exe

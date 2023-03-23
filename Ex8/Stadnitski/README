@@ -7,8 +7,10 @@ The idea:
 - Clean
 
 Steps:
+- make all: makes list, masses
 - make list (needed for part 1)
-- savelist.job
+-- savelist.job
 - make masses (needed for part 2)
-- savemasses.job
+-- savemasses.job
 - python2 CalculateWidth.py (outputs results for parts 1 & 2, makes plot)
+-- more widthRESULTS (see results)

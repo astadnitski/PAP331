@@ -34,7 +34,6 @@ def part2():
         for match in re.finditer(key, line):
             select = match.group().split(' ')
             ar.append(float(select[-1]))
-            #print(ar[-1])
     
     masses = TFile.Open('masses.root', 'RECREATE')
     tree = TTree('tree', 'Tree of Higgs masses')
@@ -64,32 +63,32 @@ def part2():
 
     hist.SetFillColor(3)
     hist.SetLineColor(1)
-    hist.SetLineWidth(2)
 
     hist.GetXaxis().SetTitle('Higgs mass [GeV]')
     hist.GetXaxis().CenterTitle(True)
     hist.GetYaxis().SetTitle('Number of events')
     hist.GetYaxis().CenterTitle(True)
 
-    #g = hist.Fit('gaus') 72
     hist.SetStats(0)
     hist.Draw()
-
-    binwidth = 1 #hist.GetBinWidth(1)
-    stdev = hist.GetStdDev()
-    print('FWHM:', 2.335 * binwidth * stdev)
 
     plotName = 'plots/HiggsHistogram'
     canvas.Print(plotName + '.C')
     canvas.Print(plotName + '.eps')
     canvas.Print(plotName + '.png')
 
-    width = 2
-    return width
+    ctr = 0
+    halfmax = hist.GetMaximum() / 2
+    for i in range(100):
+        if hist.GetBinContent(i) > halfmax: ctr += 1
+
+    return ctr * hist.GetBinWidth(1)
 
 def main():
-    with open('WidthRESULTS', 'w') as file:
+    filename = 'WidthRESULTS'
+    with open(filename, 'w') as file:
         file.write('Part 1 width\n mWidth in Pythia list output corresponding to h0:' + str(part1()) + ' GeV \n')
-        file.write('Part 2 width\n Calculated from histogram of masses: ' + str(part2()) + ' GeV')
+        file.write('Part 2 width\n Calculated from histogram of masses (1000 events, 100 bins): ' + str(part2()) + ' GeV')
+    print('Saved results to ' + filename)
     
 if __name__ == '__main__': main()
