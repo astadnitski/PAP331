@@ -6,12 +6,14 @@ Part 1
 
 Using Pythia, simulate muons at 13 TeV
 
-Plot transverse momentum
+Output transverse momentum and psuedorapidity in the same C++ script
 
-Plot pseudorapidity
+With PyROOT script, read the above data and plot using ROOT
 
 ---
 
 Part 2
+
+Probability stuff should be easy, just calculate the fraction of accepted events over total events
 
 ---

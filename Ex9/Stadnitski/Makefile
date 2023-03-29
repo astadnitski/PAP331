@@ -16,7 +16,7 @@ getPythia:
 	cd $(PYTHIA8_DIR) && ./configure && make
 
 test:
-	$(CXX) $(OPTl) $(INC) $@.cc $(LIB) -o test.exe
+	$(CXX) $(OPT) $(INC) $@.cc $(LIB) -o test.exe
 	@echo Now run test.job
 
 clean:
