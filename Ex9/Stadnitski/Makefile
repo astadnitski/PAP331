@@ -8,16 +8,16 @@ OPT = -g -Wall
 
 all: 
 	$(MAKE) getPythia
-	#$(MAKE) test
+	#$(MAKE) simulation
 
 getPythia:
 	wget $(PYTHIA8_URL)
 	tar xfvz $(PYTHIA8_TGZ)
 	cd $(PYTHIA8_DIR) && ./configure && make
 
-test:
-	$(CXX) $(OPT) $(INC) $@.cc $(LIB) -o test.exe
-	@echo Now run test.job
+simulation:
+	$(CXX) $(OPT) $(INC) $@.cc $(LIB) -o simulation.exe
+	@echo Now run simulation.job
 
 clean:
 	rm -rf $(wildcard *.tgz *~ *.txt *.exe)

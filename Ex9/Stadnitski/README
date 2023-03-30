@@ -1,7 +1,3 @@
-Here is the idea.
-
----
-
 Part 1
 
 Using Pythia, simulate muons at 13 TeV
@@ -14,6 +10,18 @@ With PyROOT script, read the above data and plot using ROOT
 
 Part 2
 
-Probability stuff should be easy, just calculate the fraction of accepted events over total events
+Calculate the fraction of accepted events over total events
 
 ---
+
+Running the exercise
+
+$ make getPythia
+
+$ make simulation
+
+$ simulation.job
+
+$ python2 GetResults.py
+
+$ make clean
