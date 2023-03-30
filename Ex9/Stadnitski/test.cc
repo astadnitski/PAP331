@@ -21,9 +21,9 @@ int main() {
         int select = 0;
         for (int j = 0; j < pythia.event.size(); j++) if (pythia.event[j].id() == 13) select = j;
         transverse.fill(pythia.event[select].pT());
-        pseudo.fill(pythia.event[select].phi());
+        pseudo.fill(pythia.event[select].eta());
         cout << i << " : Transverse momentum : " << pythia.event[select].pT() << endl;
-        cout << i << " : Pseudorapidity : " << pythia.event[select].phi() << endl;
+        cout << i << " : Pseudorapidity : " << pythia.event[select].eta() << endl;
     }
 
     /// STEP 3: PRINT AND SAVE DATA ///
