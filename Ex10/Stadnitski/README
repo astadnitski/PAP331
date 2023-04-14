@@ -1,0 +1,73 @@
+Description of the detector:
+
+Rectangular, series of absorber layers with gaps in between (two different materials alternating)
+
+Originally the absorber material is lead. Change it to water by editing DetectorConstruction class: auto absorberMaterial = G4Material::GetMaterial("G4_WATER");
+
+
+
+--- Process
+
+Steps used to produce images:
+
+1. Define $G4 variables in installation
+
+2. Add to path: export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${G4INSTALL}/lib
+
+3. Add DAWN to path: export PATH=${PATH}:/home/stadnits/programs/dawn_3_91a
+
+4. Switch to build folder
+
+5. cmake -DGeant4_DIR=${G4INSTALL}/lib/Geant4-11.1.1 $G4INSTALL/share/Geant4/examples/basic/B4/B4a
+
+6. make
+
+7. Comment/uncomment in B4a vis.mac to visualize with DAWN instead of OGL
+
+8. ./exampleB4a
+
+---
+
+- To change the detector material to water, edit DetectorConstruction.cc in SRC folder and repeat steps 5-8
+
+- Next depends on the particle.
+
+
+
+--- Electron:
+
+- /gun/particle e-
+
+- /gun/energy 10 GeV
+
+- /run/beamOn 1
+
+- OK
+
+- save lead EPS as electronLead.eps, water EPS as electronWater.eps
+
+
+--- Alpha particle:
+
+- /gun/particle alpha
+
+- /gun/energy 10 GeV
+
+- /run/beamOn 1
+
+- OK
+
+- save lead EPS as protonLead.eps, water EPS as protonWater.eps
+
+
+--- Proton:
+
+- /gun/particle proton
+
+- /gun/energy 10 GeV
+
+- /run/beamOn 1
+
+- OK
+
+- save lead EPS as alphaLead.eps, water EPS as alphaWater.eps
