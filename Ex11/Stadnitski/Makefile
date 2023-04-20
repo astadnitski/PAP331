@@ -9,7 +9,7 @@ all:
 
 compile:
 	@$(CXX) $(OPT) $(INC) analysis.cc $(LIB) $(ROOTLIBS) -o analysis.exe
-	@./analysis.exe
+	@./analysis.job
 
 clean:
 	rm -rf $(wildcard *~ *.txt *.exe)
