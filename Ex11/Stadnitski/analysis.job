@@ -1,0 +1,4 @@
+#!/bin/tcsh
+
+./simulate.exe > output.txt
+echo Finished writing output to file output.txt
