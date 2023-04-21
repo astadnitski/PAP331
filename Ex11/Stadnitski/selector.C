@@ -14,7 +14,7 @@ void selector::Begin(TTree * /*tree*/) {
 
 void selector::SlaveBegin(TTree * /*tree*/) {
    TString option = GetOption();
-   h = new TH1F("nJet", "Pileup distribution", 24, 0, 24);
+   h = new TH1F("nJet", "Pileup distribution", 60, 0, 60);
 }
 
 Bool_t selector::Process(Long64_t entry) {
@@ -25,11 +25,7 @@ Bool_t selector::Process(Long64_t entry) {
    // Check if the event passes the trigger
    if (*HLT_IsoMu24) {
       nN++;
-      // Check if the event is a pileup event
-      if (Jet_puId[*nJet]) {
-         //std::cout << nN << std::endl;
-         h -> Fill(*nJet);
-      }
+      h -> Fill(*PV_npvs);
    }
 
    return kTRUE;
@@ -46,10 +42,10 @@ void selector::Terminate() {
    std::cout << "Trigger efficiency : " << efficiency << endl;
 
    h -> SetFillColor(3);
-   h -> GetXaxis() -> SetTitle("Pileup events");
+   h -> GetXaxis() -> SetTitle("Number of primary vertices");
    h -> GetXaxis() -> CenterTitle(true);
-   //h -> GetYaxis() -> SetTitle("Number of hits");
-   //h -> GetYaxis() -> CenterTitle(true);
+   h -> GetYaxis() -> SetTitle("Number of hits");
+   h -> GetYaxis() -> CenterTitle(true);
 
    h -> Draw();
    h -> SetStats(0);
