@@ -1,1 +1,5 @@
-python2 Ex12-2.py
+python3 -Wignore Ex12-1.py && root output1.root 
+
+python2 Ex12-2.py && root output2.root 
+
+python2 MakePlots.py
